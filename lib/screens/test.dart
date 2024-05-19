@@ -8,6 +8,7 @@ import 'package:gourmethub_fl/widgets/area_chip.dart';
 import 'package:gourmethub_fl/widgets/carousel_card.dart';
 import 'package:gourmethub_fl/widgets/cat_chip.dart';
 import 'package:gourmethub_fl/widgets/custom_divider.dart';
+import 'package:gourmethub_fl/widgets/custom_list_tile.dart';
 
 class TestPage extends StatelessWidget {
   const TestPage({super.key});
@@ -166,37 +167,13 @@ class TestPage extends StatelessWidget {
                                 ...controller.meals
                                     .where((e) => e.area == controller.selectedArea.value)
                                     .map(
-                                      (e) => GestureDetector(
-                                        onTap: () {
-                                          Get.to(DetailPage(meal: e));
-                                        },
-                                        child: ListTile(
-                                          dense: true,
-                                          contentPadding: const EdgeInsets.all(4),
-                                          leading: Hero(
-                                            tag: e.meal,
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(4),
-                                              child: Image.network(e.mealThumb),
-                                            ),
-                                          ),
-                                          title: Text(
-                                            e.meal,
-                                            style: FontStyles.myFont.copyWith(fontSize: 16),
-                                          ),
-                                          subtitle: Text(
-                                            e.category,
-                                            style: FontStyles.myFont
-                                                .copyWith(fontSize: 12, color: CColors.yellow),
-                                          ),
-                                          trailing: IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                              Icons.favorite_border,
-                                              color: Colors.white,
-                                              size: 20,
-                                            ),
-                                          ),
+                                      (e) => Padding(
+                                        padding: const EdgeInsets.only(bottom: 8.0),
+                                        child: CustomListTile(
+                                          meal: e,
+                                          ontap: () {
+                                            Get.to(DetailPage(meal: e));
+                                          },
                                         ),
                                       ),
                                     ),
@@ -207,8 +184,6 @@ class TestPage extends StatelessWidget {
                       ],
                     ),
                   ),
-
-                  //*********** */
                 ],
               ),
       ),
